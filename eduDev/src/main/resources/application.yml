@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: eduDev
+  profiles:
+    default: dev
+  config:
+    import: optional:file:.env[.properties]
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: UTC
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+
+app:
+  jwt:
+    issuer: eduDev
+    secret: ${JWT_SECRET:edudev-development-secret-key-with-at-least-32-characters}
+    access-token-expiration: 15m
+    refresh-token-expiration: 7d

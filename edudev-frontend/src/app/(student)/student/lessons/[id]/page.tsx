@@ -30,27 +30,7 @@ export default function LessonViewerPage() {
     });
   };
 
-  const displayLesson = lesson || {
-    id: params.id,
-    title: 'Tính đơn điệu của hàm số - Phần 1',
-    content: `
-      <h2>1. Định nghĩa</h2>
-      <p>Cho hàm số y = f(x) xác định trên K (K là một khoảng, một đoạn hoặc một nửa khoảng).</p>
-      <ul>
-        <li>Hàm số y = f(x) đồng biến (tăng) trên K nếu với mọi cặp x1, x2 thuộc K, x1 < x2 thì f(x1) < f(x2).</li>
-        <li>Hàm số y = f(x) nghịch biến (giảm) trên K nếu với mọi cặp x1, x2 thuộc K, x1 < x2 thì f(x1) > f(x2).</li>
-      </ul>
-      <h2>2. Điều kiện cần để hàm số đơn điệu</h2>
-      <p>Giả sử hàm số y = f(x) có đạo hàm trên khoảng K.</p>
-      <ul>
-        <li>Nếu f'(x) >= 0 với mọi x thuộc K và f'(x) = 0 chỉ tại một số hữu hạn điểm thì hàm số đồng biến trên K.</li>
-        <li>Nếu f'(x) <= 0 với mọi x thuộc K và f'(x) = 0 chỉ tại một số hữu hạn điểm thì hàm số nghịch biến trên K.</li>
-      </ul>
-      <p>Ví dụ: Xét tính đơn điệu của hàm số y = x³ - 3x² + 4...</p>
-    `,
-    duration: 15,
-    isCompleted: false,
-  };
+  const displayLesson = lesson || null;
 
   return (
     <div className="max-w-5xl mx-auto pb-20 animate-in fade-in duration-500">

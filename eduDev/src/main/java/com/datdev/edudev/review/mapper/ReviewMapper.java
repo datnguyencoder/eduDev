@@ -20,12 +20,12 @@ public interface ReviewMapper {
     ReviewResponse toResponse(ContentReview review);
 
     @Mapping(target = "type", constant = "LESSON")
-    @Mapping(target = "creatorName", source = "creatorId") // Mocking name lookup or separate logic
-    PendingContentResponse lessonToPending(Lesson lesson);
+    @Mapping(target = "creatorName", source = "creatorName")
+    PendingContentResponse lessonToPending(Lesson lesson, String creatorName);
 
     @Mapping(target = "type", constant = "QUIZ")
-    @Mapping(target = "creatorName", source = "creatorId")
-    PendingContentResponse quizToPending(Quiz quiz);
+    @Mapping(target = "creatorName", source = "creatorName")
+    PendingContentResponse quizToPending(Quiz quiz, String creatorName);
 
     List<ReviewResponse> toResponseList(List<ContentReview> reviews);
 }

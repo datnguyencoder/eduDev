@@ -22,7 +22,7 @@ export default function StudentMonitorPage() {
   const { data: students, isLoading } = useAssignedStudents();
   const [search, setSearch] = useState('');
 
-  const displayStudents = students || mockStudents;
+  const displayStudents = students || [];
 
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
@@ -150,10 +150,4 @@ export default function StudentMonitorPage() {
   );
 }
 
-const mockStudents = [
-  { id: '1', fullName: 'Nguyễn Văn A', grade: '12', progress: 85, lastActive: '10 phút trước', targetMajor: 'Khoa học Máy tính' },
-  { id: '2', fullName: 'Trần Thị B', grade: '11', progress: 42, lastActive: '2 giờ trước', targetMajor: 'Ngôn ngữ Anh' },
-  { id: '3', fullName: 'Lê Văn C', grade: '12', progress: 95, lastActive: 'Vừa xong', targetMajor: 'Kỹ thuật Phần mềm' },
-  { id: '4', fullName: 'Phạm Minh D', grade: '12', progress: 12, lastActive: '3 ngày trước', targetMajor: 'Logistics' },
-  { id: '5', fullName: 'Hoàng Anh E', grade: '10', progress: 60, lastActive: '5 giờ trước', targetMajor: 'Marketing' },
-];
+

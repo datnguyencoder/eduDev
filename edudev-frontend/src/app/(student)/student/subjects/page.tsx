@@ -14,15 +14,7 @@ import { useSubjects } from '@/lib/query/hooks/useSubjects';
 export default function SubjectsPage() {
   const { data: subjects, isLoading } = useSubjects();
 
-  // Mock data if API is not available yet
-  const displaySubjects = subjects || [
-    { id: '1', name: 'Toán học', description: 'Đại số, Hình học và Giải tích lớp 12', totalLessons: 24, completedLessons: 8 },
-    { id: '2', name: 'Vật lý', description: 'Cơ học, Nhiệt học và Điện xoay chiều', totalLessons: 20, completedLessons: 4 },
-    { id: '3', name: 'Hóa học', description: 'Hóa hữu cơ và Vô cơ chuyên sâu', totalLessons: 18, completedLessons: 0 },
-    { id: '4', name: 'Tiếng Anh', description: 'Từ vựng, Ngữ pháp và Luyện thi đại học', totalLessons: 30, completedLessons: 15 },
-    { id: '5', name: 'Sinh học', description: 'Di truyền, Tiến hóa và Sinh thái học', totalLessons: 15, completedLessons: 2 },
-    { id: '6', name: 'Ngữ văn', description: 'Nghị luận xã hội và Tác phẩm văn học trọng điểm', totalLessons: 12, completedLessons: 6 },
-  ];
+  const displaySubjects = subjects || [];
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">

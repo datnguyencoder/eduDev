@@ -135,7 +135,7 @@ export default function UserManagementPage() {
     },
   ];
 
-  const displayUsers = users || mockUsers;
+  const displayUsers = users || [];
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -198,10 +198,4 @@ export default function UserManagementPage() {
   );
 }
 
-const mockUsers: UserDataType[] = [
-  { id: 'USR-001', fullName: 'Nguyễn Văn An', email: 'an.nv@gmail.com', role: 'ADMIN', status: 'ACTIVE', createdAt: '2024-01-10' },
-  { id: 'USR-012', fullName: 'Lê Minh Hạnh', email: 'hanh.le@edudev.vn', role: 'TEACHER', status: 'ACTIVE', createdAt: '2024-02-15' },
-  { id: 'USR-542', fullName: 'Trần Thế Minh', email: 'minh.tt@gmail.com', role: 'STUDENT', status: 'ACTIVE', createdAt: '2024-03-01' },
-  { id: 'USR-891', fullName: 'Phạm Hồng Duy', email: 'duy.ph@gmail.com', role: 'STUDENT', status: 'INACTIVE', createdAt: '2024-03-05' },
-  { id: 'USR-025', fullName: 'Ngô Bảo Châu', email: 'chau.nb@edudev.vn', role: 'TEACHER', status: 'ACTIVE', createdAt: '2024-02-20' },
-];
+

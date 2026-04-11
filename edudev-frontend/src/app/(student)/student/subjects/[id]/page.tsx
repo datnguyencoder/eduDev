@@ -72,8 +72,14 @@ export default function SubjectTopicsPage() {
           [...Array(3)].map((_, i) => (
              <div key={i} className="h-40 bg-slate-100 rounded-2xl animate-pulse" />
           ))
+        ) : (!topics || topics.length === 0) ? (
+          <div className="py-16 text-center bg-white rounded-3xl border border-slate-200 shadow-sm mt-8">
+              <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4"><BookOpen size={32} /></div>
+              <h3 className="text-xl font-bold text-slate-800 mb-2">Môn học đang cập nhật</h3>
+              <p className="text-slate-500 max-w-sm mx-auto text-sm">Nội dung của môn học này đang được biên soạn và sẽ sớm ra mắt. Cảm ơn bạn đã chờ đợi.</p>
+          </div>
         ) : (
-          (topics || mockTopics).map((topic, topicIdx) => (
+          (topics || []).map((topic: any, topicIdx: number) => (
             <div key={topic.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
               <div className="p-6 border-b border-slate-50 bg-slate-50/30 flex items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -132,25 +138,3 @@ function LessonRow({ lesson, subjectId }: any) {
     </Link>
   );
 }
-
-const mockTopics = [
-  {
-    id: 't1',
-    name: 'Ứng dụng đạo hàm để khảo sát hàm số',
-    lessons: [
-      { id: 'l1', title: 'Tính đơn điệu của hàm số', duration: 15, isCompleted: true },
-      { id: 'l2', title: 'Cực trị của hàm số', duration: 20, isCompleted: true },
-      { id: 'l3', title: 'Giá trị lớn nhất, giá trị nhỏ nhất', duration: 25, isCompleted: false },
-      { id: 'l4', title: 'Đường tiệm cận của đồ thị hàm số', duration: 18, isCompleted: false },
-    ]
-  },
-  {
-    id: 't2',
-    name: 'Hàm số lũy thừa, mũ và logarit',
-    lessons: [
-      { id: 'l5', title: 'Lũy thừa và hàm số lũy thừa', duration: 20, isCompleted: false },
-      { id: 'l6', title: 'Logarit và các tính chất', duration: 22, isCompleted: false },
-      { id: 'l7', title: 'Hàm số mũ và hàm số logarit', duration: 30, isCompleted: false },
-    ]
-  }
-];

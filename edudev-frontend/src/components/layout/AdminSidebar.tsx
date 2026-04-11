@@ -21,7 +21,7 @@ const sidebarItems = [
   { name: 'Người dùng', href: ROUTES.ADMIN.USERS, icon: Users },
   { name: 'Duyệt bài đăng', href: ROUTES.ADMIN.MODERATION, icon: ShieldCheck },
   { name: 'Danh mục Ngành', href: ROUTES.ADMIN.MAJORS, icon: BookMarked },
-  { name: 'Thông báo hệ thống', href: ROUTES.ADMIN.MODERATION, icon: BellRing },
+  // { name: 'Thông báo hệ thống', href: ROUTES.ADMIN.NOTIFICATIONS, icon: BellRing },
   { name: 'Cấu hình hệ thống', href: ROUTES.ADMIN.SETTINGS, icon: Settings },
 ];
 

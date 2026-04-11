@@ -45,14 +45,16 @@ public class ReviewService {
         
         // Load PENDING lessons
         lessonRepository.findByStatus(ContentStatus.PENDING_REVIEW).forEach(l -> {
-            pending.add(reviewMapper.lessonToPending(l));
+            String cName = userRepository.findById(l.getCreatorId()).map(u -> u.getFullName()).orElse("Unknown Creator");
+            pending.add(reviewMapper.lessonToPending(l, cName));
         });
 
         // Load PENDING quizzes
         quizRepository.findAll().stream()
                 .filter(q -> q.getStatus() == ContentStatus.PENDING_REVIEW)
                 .forEach(q -> {
-                    pending.add(reviewMapper.quizToPending(q));
+                    String cName = userRepository.findById(q.getCreatorId()).map(u -> u.getFullName()).orElse("Unknown Creator");
+                    pending.add(reviewMapper.quizToPending(q, cName));
                 });
 
         return pending;

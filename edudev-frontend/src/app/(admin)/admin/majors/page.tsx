@@ -107,7 +107,7 @@ export default function AdminMajorsPage() {
         salaryRange: 'Đang cập nhật',
         marketTrend: 'stable',
       }))
-    : mockMajors;
+    : [];
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -218,10 +218,4 @@ export default function AdminMajorsPage() {
   );
 }
 
-const mockMajors: MajorDataType[] = [
-  { id: '1', name: 'Khoa học Máy tính', code: '7480101', admissionSubjects: ['A00', 'A01', 'D07'], salaryRange: '15-25Tr', marketTrend: 'growing' },
-  { id: '2', name: 'Logistics', code: '7510605', admissionSubjects: ['A00', 'D01', 'A01'], salaryRange: '12-18Tr', marketTrend: 'growing' },
-  { id: '3', name: 'Marketing', code: '7340115', admissionSubjects: ['D01', 'D07', 'A01'], salaryRange: '10-15Tr', marketTrend: 'stable' },
-  { id: '4', name: 'Quản trị Khách sạn', code: '7810201', admissionSubjects: ['D01', 'D07', 'D10'], salaryRange: '12-20Tr', marketTrend: 'stable' },
-  { id: '5', name: 'Ngôn ngữ Anh', code: '7220201', admissionSubjects: ['D01', 'D14', 'D15'], salaryRange: '12-20Tr', marketTrend: 'stable' },
-];
+

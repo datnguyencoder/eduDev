@@ -4,9 +4,9 @@
 -- 1. Thêm Users: admin, teacher, student (Password: 123456 -> hash bcrypt mock)
 -- Lưu ý: Mật khẩu này nên đc mã hoá tương tự password thực tế. Để đơn giản dùng bcrypt hash của "123456" ($2a$10$X... )
 INSERT INTO users (id, email, password_hash, full_name, role, status) VALUES
-(1, 'admin@edudev.com', '$2a$10$DowzT8Poh9GgSWeMh7g8t.M4w59wO9YgN2RzX5s6K.D7IqP79wzH2', 'System Admin', 'ADMIN', 'ACTIVE'),
-(2, 'teacher@edudev.com', '$2a$10$DowzT8Poh9GgSWeMh7g8t.M4w59wO9YgN2RzX5s6K.D7IqP79wzH2', 'Teacher Nguyen', 'TEACHER', 'ACTIVE'),
-(3, 'student@edudev.com', '$2a$10$DowzT8Poh9GgSWeMh7g8t.M4w59wO9YgN2RzX5s6K.D7IqP79wzH2', 'Student Tran', 'STUDENT', 'ACTIVE')
+(1, 'admin@edudev.com', '$2b$10$8vEPSzZbappR2qHz3tjrJO3fm1UVbs0GSzODEm6u8rjUf1VS51q8q', 'System Admin', 'ADMIN', 'ACTIVE'),
+(2, 'teacher@edudev.com', '$2b$10$8vEPSzZbappR2qHz3tjrJO3fm1UVbs0GSzODEm6u8rjUf1VS51q8q', 'Teacher Nguyen', 'TEACHER', 'ACTIVE'),
+(3, 'student@edudev.com', '$2b$10$8vEPSzZbappR2qHz3tjrJO3fm1UVbs0GSzODEm6u8rjUf1VS51q8q', 'Student Tran', 'STUDENT', 'ACTIVE')
 ON CONFLICT (email) DO NOTHING;
 
 -- Reset sequence manually

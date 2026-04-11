@@ -21,7 +21,7 @@ export default function MajorsPage() {
   const { data: majors, isLoading } = useMajors({ search });
   const { mutate: toggleWishlist } = useToggleWishlist();
 
-  const displayMajors = majors || mockMajors;
+  const displayMajors = majors || [];
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -138,12 +138,3 @@ export default function MajorsPage() {
     </div>
   );
 }
-
-const mockMajors = [
-  { id: '1', name: 'Khoa học Máy tính', code: '7480101', description: 'Nghiên cứu về máy tính, thuật toán, trí tuệ nhân tạo và xử lý dữ liệu quy mô lớn.', admissionSubjects: ['A00', 'A01', 'D07'], salaryRange: '15-25Tr' },
-  { id: '2', name: 'Logistics và QL Chuỗi cung ứng', code: '7510605', description: 'Quản lý việc vận chuyển, lưu kho và phân phối hàng hóa trên phạm vi toàn cầu.', admissionSubjects: ['A00', 'D01', 'A01'], salaryRange: '12-18Tr' },
-  { id: '3', name: 'Marketing kĩ thuật số', code: '7340115', description: 'Chiến lược truyền thông, quảng cáo và phân tích hành vi khách hàng trên nền tảng số.', admissionSubjects: ['D01', 'D07', 'D10'], salaryRange: '10-15Tr' },
-  { id: '4', name: 'Ngôn ngữ Anh', code: '7220201', description: 'Thấu hiểu văn hóa, ngữ pháp và kỹ năng giao tiếp tiếng Anh chuyên nghiệp.', admissionSubjects: ['D01', 'D14', 'D15'], salaryRange: '12-20Tr' },
-  { id: '5', name: 'Quản trị khách sạn', code: '7810201', description: 'Dịch vụ cao cấp, vận hành hệ thống khách sạn và du lịch quốc tế.', admissionSubjects: ['D01', 'A01', 'D07'], salaryRange: '10-18Tr' },
-  { id: '6', name: 'Công nghệ thực phẩm', code: '7540101', description: 'Nghiên cứu quy trình chế biến, bảo quản và kiểm soát chất lượng thực phẩm.', admissionSubjects: ['A00', 'B00', 'D07'], salaryRange: '12-15Tr' },
-];

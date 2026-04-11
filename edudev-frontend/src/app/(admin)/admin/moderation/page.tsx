@@ -32,7 +32,7 @@ export default function ModerationPage() {
     });
   };
 
-  const displayQueue = queue || mockQueue;
+  const displayQueue = queue || [];
 
   return (
     <div className="space-y-10 animate-in fade-in duration-700">
@@ -74,7 +74,7 @@ export default function ModerationPage() {
             <div className="space-y-4">
                {displayQueue.map((item: any) => (
                   <ModerationCard 
-                    key={item.id} 
+                    key={item.id ? `${item.type}-${item.id}` : `fallback-${item.title}`} 
                     item={item} 
                     onApprove={() => handleApprove(item.type, item.id)}
                   />
@@ -149,8 +149,8 @@ function ModerationCard({ item, onApprove }: any) {
              </div>
              <h4 className="text-xl font-black text-slate-800 tracking-tight group-hover:text-emerald-700 transition-colors mb-3">{item.title}</h4>
              <div className="flex items-center gap-3 mb-6">
-                <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold uppercase">{item.authorName.charAt(0)}</div>
-                <span className="text-sm font-bold text-slate-500">Người soạn: <span className="text-slate-800">{item.authorName}</span></span>
+                <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold uppercase">{(item.creatorName || item.authorName || '?').charAt(0)}</div>
+                <span className="text-sm font-bold text-slate-500">Người soạn: <span className="text-slate-800">{item.creatorName || item.authorName || 'Unknown'}</span></span>
              </div>
              
              <div className="flex flex-wrap gap-3">
@@ -173,9 +173,4 @@ function ModerationCard({ item, onApprove }: any) {
   );
 }
 
-const mockQueue = [
-  { id: 'MOD-01', title: 'Tích phân từng phần và ứng dụng thực tế', authorName: 'Thầy Nguyễn An', type: 'LESSON', createdAt: '10:30 Hôm nay' },
-  { id: 'MOD-02', title: 'Bộ câu hỏi thi thử THPT Quốc gia 2024 - Môn Lý', authorName: 'Cô Lê Hạnh', type: 'QUIZ', createdAt: '09:15 Hôm nay' },
-  { id: 'MOD-03', title: 'Combo chinh phục điểm 9+ Khối D', authorName: 'Thầy Minh Trần', type: 'COMBO', createdAt: 'Hôm qua' },
-  { id: 'MOD-04', title: 'Lịch sử khai phá vùng đất Nam Bộ', authorName: 'Cô Nguyễn Mai', type: 'LESSON', createdAt: '14:20 Hôm qua' },
-];
+

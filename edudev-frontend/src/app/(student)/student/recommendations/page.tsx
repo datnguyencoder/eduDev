@@ -32,23 +32,7 @@ export default function RecommendationPage() {
         admissionSubjects: [],
         marketTrend: 'stable',
       }))
-    : [
-    { 
-      id: 1, name: 'Khoa học Máy tính', code: '7480101', 
-      fitnessScore: 94, aiAdvice: 'Dựa trên điểm Toán (9.5) và kết quả giải bài tập thuật toán xuất sắc của bạn.',
-      admissionSubjects: ['A00', 'A01'], marketTrend: 'growing'
-    },
-    { 
-      id: 2, name: 'Kỹ thuật Phần mềm', code: '7480103', 
-      fitnessScore: 88, aiAdvice: 'Kỹ năng tư duy logic và khả năng làm việc nhóm của bạn qua các bài tập dự án được đánh giá cao.',
-      admissionSubjects: ['A00', 'D07'], marketTrend: 'growing'
-    },
-    { 
-      id: 3, name: 'Trí tuệ Nhân tạo', code: '7480107', 
-      fitnessScore: 82, aiAdvice: 'Sự yêu thích của bạn với các môn Tự nhiên và mong muốn khám phá công nghệ mới.',
-      admissionSubjects: ['A01', 'D01'], marketTrend: 'growing'
-    },
-  ];
+    : [];
 
   return (
     <div className="max-w-6xl mx-auto space-y-10 animate-in fade-in duration-700">
@@ -101,7 +85,13 @@ export default function RecommendationPage() {
 
             <div className="space-y-6">
               {isLoading ? (
-                [...Array(3)].map((_, i) => <div key={i} className="h-44 bg-slate-100 rounded-2xl animate-pulse" />)
+                [...Array(3)].map((_, i) => <div key={i} className="h-44 bg-slate-100 rounded-2xl border border-slate-200 animate-pulse" />)
+              ) : topMajors.length === 0 ? (
+                <div className="py-12 bg-white rounded-3xl border border-slate-200 text-center shadow-sm">
+                   <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4"><BrainCircuit size={32} /></div>
+                   <h3 className="text-xl font-bold text-slate-800 mb-2">Chưa đủ dữ liệu phân tích</h3>
+                   <p className="text-slate-500 max-w-md mx-auto text-sm">Hệ thống AI cần bạn hoàn thành thêm các bài kiểm tra và bài giảng để có thể đưa ra gợi ý ngành nghề chính xác nhất.</p>
+                </div>
               ) : (
                 topMajors.map((major, idx) => (
                   <MajorRecommendationCard 

@@ -27,13 +27,13 @@ import type { AdminStats, ModerationItem } from '@/lib/api/adminApi';
 import type { ReactNode } from 'react';
 
 const chartData = [
-  { name: 'Thứ 2', users: 400 },
-  { name: 'Thứ 3', users: 300 },
-  { name: 'Thứ 4', users: 200 },
-  { name: 'Thứ 5', users: 278 },
-  { name: 'Thứ 6', users: 189 },
-  { name: 'Thứ 7', users: 239 },
-  { name: 'Chủ nhật', users: 349 },
+  { name: 'Thứ 2', users: 0 },
+  { name: 'Thứ 3', users: 0 },
+  { name: 'Thứ 4', users: 0 },
+  { name: 'Thứ 5', users: 0 },
+  { name: 'Thứ 6', users: 0 },
+  { name: 'Thứ 7', users: 0 },
+  { name: 'CN', users: 0 },
 ];
 
 export default function AdminDashboardPage() {
@@ -41,20 +41,16 @@ export default function AdminDashboardPage() {
   const { data: queue } = useModerationQueue();
 
   const displayStats: AdminStats = stats || {
-    totalStudents: 1250,
-    totalTeachers: 45,
-    totalLessons: 342,
-    totalQuizzes: 89,
+    totalStudents: 0,
+    totalTeachers: 0,
+    totalLessons: 0,
+    totalQuizzes: 0,
     totalEnrollments: 0,
     totalQuizAttempts: 0,
-    pendingReviews: 12,
+    pendingReviews: 0,
   };
 
-  const displayQueue: ModerationItem[] = queue || [
-    { id: 1, title: 'Hệ phương trình bậc 2', creatorId: 101, creatorName: 'Thầy Nguyễn An', type: 'LESSON', updatedAt: '10:30 Hôm nay' },
-    { id: 2, title: 'Quiz Vật lý hạt nhân', creatorId: 102, creatorName: 'Cô Lê Hạnh', type: 'QUIZ', updatedAt: '09:15 Hôm nay' },
-    { id: 3, title: 'Combo Luyện thi đánh giá năng lực', creatorId: 103, creatorName: 'Thầy Minh Trần', type: 'COMBO', updatedAt: 'Hôm qua' },
-  ];
+  const displayQueue: ModerationItem[] = queue || [];
 
   return (
     <div className="space-y-10 animate-in fade-in duration-700">
@@ -114,7 +110,7 @@ export default function AdminDashboardPage() {
 
             <div className="space-y-6">
                {displayQueue.map((item) => (
-                  <div key={item.id} className="group p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all cursor-pointer">
+                  <div key={item.id ? `${item.type}-${item.id}` : `fallback-${item.title}`} className="group p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all cursor-pointer">
                      <div className="flex items-center justify-between mb-2">
                         <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">{item.type}</span>
                         <span className="text-[10px] text-slate-500 italic uppercase">{item.updatedAt}</span>

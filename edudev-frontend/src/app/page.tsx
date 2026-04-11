@@ -45,9 +45,9 @@ export default function LandingPage() {
           </div>
           
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-            <a href="#features" className="hover:text-blue-600 transition-colors">Tính năng</a>
-            <a href="#how-it-works" className="hover:text-blue-600 transition-colors">Cách hoạt động</a>
-            <a href="#recommendation" className="hover:text-blue-600 transition-colors">AI Hướng nghiệp</a>
+            <Link href="#features" className="hover:text-blue-600 transition-colors">Tính năng</Link>
+            <Link href="#how-it-works" className="hover:text-blue-600 transition-colors">Cách hoạt động</Link>
+            <Link href="#recommendation" className="hover:text-blue-600 transition-colors">AI Hướng nghiệp</Link>
           </div>
 
           <div className="flex items-center gap-4">
@@ -288,30 +288,30 @@ export default function LandingPage() {
             <div>
               <h4 className="text-white font-bold mb-6">Sản phẩm</h4>
               <ul className="space-y-4 text-sm">
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Bài giảng</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Quiz luyện tập</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Tư vấn chọn ngành</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Dashboard AI</a></li>
+                <li><Link href="#" className="hover:text-blue-500 transition-colors">Bài giảng</Link></li>
+                <li><Link href="#" className="hover:text-blue-500 transition-colors">Quiz luyện tập</Link></li>
+                <li><Link href="#" className="hover:text-blue-500 transition-colors">Tư vấn chọn ngành</Link></li>
+                <li><Link href="#" className="hover:text-blue-500 transition-colors">Dashboard AI</Link></li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-white font-bold mb-6">Học sinh</h4>
               <ul className="space-y-4 text-sm">
-                <li><a href={ROUTES.PUBLIC.LOGIN} className="hover:text-blue-500 transition-colors">Đăng nhập</a></li>
-                <li><a href={ROUTES.PUBLIC.REGISTER} className="hover:text-blue-500 transition-colors">Tạo tài khoản</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Hướng dẫn sử dụng</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Cộng đồng</a></li>
+                <li><Link href={ROUTES.PUBLIC.LOGIN} className="hover:text-blue-500 transition-colors">Đăng nhập</Link></li>
+                <li><Link href={ROUTES.PUBLIC.REGISTER} className="hover:text-blue-500 transition-colors">Tạo tài khoản</Link></li>
+                <li><Link href="#" className="hover:text-blue-500 transition-colors">Hướng dẫn sử dụng</Link></li>
+                <li><Link href="#" className="hover:text-blue-500 transition-colors">Cộng đồng</Link></li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-white font-bold mb-6">Liên kết</h4>
               <ul className="space-y-4 text-sm">
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Về chúng tôi</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Chính sách bảo mật</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Điều khoản dịch vụ</a></li>
-                <li><a href="#" className="hover:text-blue-500 transition-colors">Liên hệ</a></li>
+                <li><Link href="#" className="hover:text-blue-500 transition-colors">Về chúng tôi</Link></li>
+                <li><Link href="#" className="hover:text-blue-500 transition-colors">Chính sách bảo mật</Link></li>
+                <li><Link href="#" className="hover:text-blue-500 transition-colors">Điều khoản dịch vụ</Link></li>
+                <li><Link href="#" className="hover:text-blue-500 transition-colors">Liên hệ</Link></li>
               </ul>
             </div>
           </div>

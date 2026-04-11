@@ -11,6 +11,7 @@ import {
   ExternalLink,
   BookOpen
 } from 'lucide-react';
+import Link from 'next/link';
 import { useLessonDetail, useCompleteLesson } from '@/lib/query/hooks/useSubjects';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
@@ -128,16 +129,16 @@ export default function LessonViewerPage() {
               </h4>
               <ul className="space-y-4">
                  <li>
-                    <a href="#" className="flex items-center justify-between text-sm group hover:text-blue-600 transition-colors">
+                    <Link href="#" className="flex items-center justify-between text-sm group hover:text-blue-600 transition-colors">
                        <span className="truncate pr-2">File tóm tắt kiến thức (.pdf)</span>
                        <ExternalLink size={14} className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </a>
+                    </Link>
                  </li>
                  <li>
-                    <a href="#" className="flex items-center justify-between text-sm group hover:text-blue-600 transition-colors">
+                    <Link href="#" className="flex items-center justify-between text-sm group hover:text-blue-600 transition-colors">
                        <span className="truncate pr-2">Bài tập tự luyện (Google Form)</span>
                        <ExternalLink size={14} className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </a>
+                    </Link>
                  </li>
               </ul>
            </div>

@@ -18,7 +18,7 @@ springdoc:
 
 app:
   jwt:
-    issuer: eduDev-test
+    issuer: edudev-test
     secret: edudev-test-secret-key-with-at-least-32-characters
     access-token-expiration: 15m
     refresh-token-expiration: 7d

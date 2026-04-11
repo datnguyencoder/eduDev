@@ -30,9 +30,12 @@ spring:
       group-id: edudev-dev-group
     producer:
       acks: all
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 logging:
   level:
     root: INFO
+    com.datdev.edudev: DEBUG
     org.springframework.security: INFO
     org.hibernate.SQL: DEBUG

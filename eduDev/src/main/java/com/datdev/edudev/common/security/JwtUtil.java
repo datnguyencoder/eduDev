@@ -47,6 +47,29 @@ public class JwtUtil {
         Claims claims = parseToken(token, JwtTokenType.ACCESS);
         return buildUserDetails(claims);
     }
+    public RefreshTokenClaims parseRefreshToken(String token) {
+        Claims claims = parseToken(token, JwtTokenType.REFRESH);
+        String jti = claims.getId();
+        Number userId = claims.get(CLAIM_USER_ID, Number.class);
+        String email = claims.getSubject();
+        String role = claims.get(CLAIM_ROLE, String.class);
+
+        if (jti == null || userId == null) {
+            throw new JwtAuthenticationException(
+                    ErrorCode.INVALID_TOKEN,
+                    "Refresh token is missing required claims"
+            );
+        }
+
+        return new RefreshTokenClaims(
+                UUID.fromString(jti),
+                userId.longValue(),
+                email,
+                role
+        );
+    }
+    public record RefreshTokenClaims(UUID tokenId, Long userId, String email, String role) {}
+
 
     public String resolveToken(String authorizationHeader) {
         if (!StringUtils.hasText(authorizationHeader) || !authorizationHeader.startsWith(BEARER_PREFIX)) {

@@ -1,0 +1,259 @@
+### eduDev API Comprehensive Tests
+# Uses IntelliJ IDEA or VS Code REST Client format
+# Note: You need to install "REST Client" extension in VS Code.
+
+@host = http://localhost:8080
+@contentType = application/json
+
+### =======================================
+### 1. AUTHENTICATION & PROFILES
+### =======================================
+
+### 1.1 Login as Admin (Lưu token vào biến adminToken)
+# @name loginAdmin
+POST {{host}}/v1/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "admin@edudev.com",
+  "password": "123456"
+}
+> {% client.global.set("adminToken", response.body.accessToken); %}
+
+### 1.2 Login as Teacher (Lưu token vào biến teacherToken)
+# @name loginTeacher
+POST {{host}}/v1/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "teacher@edudev.com",
+  "password": "123456"
+}
+> {% client.global.set("teacherToken", response.body.accessToken); %}
+
+### 1.3 Login as Student (Lưu token vào biến studentToken)
+# @name loginStudent
+POST {{host}}/v1/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "student@edudev.com",
+  "password": "123456"
+}
+> {% client.global.set("studentToken", response.body.accessToken); %}
+
+### 1.4 Get Current User Profile (Admin)
+GET {{host}}/v1/users/me
+Authorization: Bearer {{adminToken}}
+
+### 1.5 Get Current Student Profile
+GET {{host}}/v1/profiles/student/me
+Authorization: Bearer {{studentToken}}
+
+### 1.6 Update Student Profile
+PUT {{host}}/v1/profiles/student/me
+Authorization: Bearer {{studentToken}}
+Content-Type: {{contentType}}
+
+{
+  "fullName": "Student Tran Updated",
+  "grade": "12",
+  "targetExamYear": 2026,
+  "interestedMajors": "IT, Business",
+  "favoriteSubjects": "Toán, Lý, Hóa"
+}
+
+### 1.7 Update Teacher Profile
+PUT {{host}}/v1/profiles/teacher/me
+Authorization: Bearer {{teacherToken}}
+Content-Type: {{contentType}}
+
+{
+  "fullName": "Teacher Nguyen Elite",
+  "specialization": "IELTS & TOEIC",
+  "yearsOfExperience": 6,
+  "bio": "Chuyên gia tiếng anh với kinh nghiệm 6 năm"
+}
+
+
+### =======================================
+### 2. SUBJECTS & TOPICS (Admin)
+### =======================================
+
+### 2.1 Get All Subjects
+GET {{host}}/v1/subjects
+
+### 2.2 Create New Subject (Admin)
+POST {{host}}/v1/admin/subjects
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+{
+  "name": "Physics Fundamentals",
+  "description": "Lý thuyết và bài tập môn Vật Lý",
+  "iconUrl": "icon-physics.png",
+  "displayOrder": 3
+}
+
+### 2.3 Get Topics by Subject
+GET {{host}}/v1/subjects/1/topics
+
+
+### =======================================
+### 3. LESSONS (Teacher & Admin)
+### =======================================
+
+### 3.1 Create Lesson (Teacher)
+POST {{host}}/v1/teacher/lessons
+Authorization: Bearer {{teacherToken}}
+Content-Type: {{contentType}}
+
+{
+  "topicId": 1,
+  "title": "Lesson 3: Advanced Algebra",
+  "content": "Nội dung bài học đại số nâng cao chi tiết...",
+  "displayOrder": 3
+}
+
+### 3.2 Get My Created Lessons (Teacher)
+GET {{host}}/v1/teacher/lessons
+Authorization: Bearer {{teacherToken}}
+
+### 3.3 Approve Lesson (Admin)
+# Giả sử lesson ID 2 đang ở PENDING_REVIEW
+POST {{host}}/v1/admin/reviews/lessons/2/approve
+Authorization: Bearer {{adminToken}}
+Content-Type: {{contentType}}
+
+{
+  "note": "Okay, bài viết rất tốt."
+}
+
+
+### =======================================
+### 4. QUIZZES (Teacher & Student)
+### =======================================
+
+### 4.1 Create Quiz (Teacher)
+# @name createQuiz
+POST {{host}}/v1/teacher/quizzes
+Authorization: Bearer {{teacherToken}}
+Content-Type: {{contentType}}
+
+{
+  "subjectId": 1,
+  "title": "New Mock Test 2024",
+  "description": "Đề thi thử 2024 mới nhất",
+  "durationMinutes": 90,
+  "isPremium": false
+}
+
+### 4.2 Submit Quiz Attempt (Student)
+POST {{host}}/v1/user/quizzes/1/submit
+Authorization: Bearer {{studentToken}}
+Content-Type: {{contentType}}
+
+{
+  "answers": [
+    {
+      "questionId": 1,
+      "selectedOptionId": 1
+    },
+    {
+      "questionId": 2,
+      "selectedOptionId": 3
+    }
+  ]
+}
+
+### 4.3 Get My Quiz Attempts (Student)
+GET {{host}}/v1/user/quizzes/1/attempts
+Authorization: Bearer {{studentToken}}
+
+
+### =======================================
+### 5. COMBOS & ENROLLMENT
+### =======================================
+
+### 5.1 Get Published Combos
+GET {{host}}/v1/combos
+
+### 5.2 Enroll to Combo (Student)
+POST {{host}}/v1/user/combos/1/enroll
+Authorization: Bearer {{studentToken}}
+
+### 5.3 Get Enrolled Combos (Student)
+GET {{host}}/v1/user/combos/enrolled
+Authorization: Bearer {{studentToken}}
+
+
+### =======================================
+### 6. TEACHER WORKFLOW & FEEDBACK
+### =======================================
+
+### 6.1 Get Assigned Students (Teacher)
+GET {{host}}/v1/teacher/workflow/students
+Authorization: Bearer {{teacherToken}}
+
+### 6.2 Give Feedback to Student (Teacher)
+POST {{host}}/v1/teacher/workflow/feedbacks
+Authorization: Bearer {{teacherToken}}
+Content-Type: {{contentType}}
+
+{
+  "studentId": 3,
+  "lessonId": 1,
+  "content": "Em cần cải thiện tốc độ tư duy logic",
+  "rating": 3
+}
+
+### 6.3 Get Student Feedbacks (Student)
+GET {{host}}/v1/user/quizzes/1/attempts
+# Note: Endpoint may specifically be under notifications or profiles
+# Since no direct GET /feedbacks for student exists yet, we rely on notifications for feedbacks.
+
+
+### =======================================
+### 7. MAJORS & CAREER RECOMMENDATION
+### =======================================
+
+### 7.1 Get All Majors
+GET {{host}}/v1/majors
+
+### 7.2 Get Custom Career Recommendation (Student)
+POST {{host}}/v1/recommendations/analyze
+Authorization: Bearer {{studentToken}}
+
+### 7.3 Get My Saved Recommendations (Student)
+GET {{host}}/v1/recommendations/saved
+Authorization: Bearer {{studentToken}}
+
+
+### =======================================
+### 8. NOTIFICATIONS
+### =======================================
+
+### 8.1 Get My Notifications (Student)
+GET {{host}}/v1/notifications
+Authorization: Bearer {{studentToken}}
+
+### 8.2 Mark ALL as Read
+PUT {{host}}/v1/notifications/read-all
+Authorization: Bearer {{studentToken}}
+
+
+### =======================================
+### 9. ANALYTICS (Admin)
+### =======================================
+
+### 9.1 Get System Dashboard Stats
+GET {{host}}/v1/admin/analytics/dashboard
+Authorization: Bearer {{adminToken}}
+
+### 9.2 Get Content Analytics
+GET {{host}}/v1/admin/analytics/content
+Authorization: Bearer {{adminToken}}
+
+### 9.3 Get Recommendation Analytics
+GET {{host}}/v1/admin/analytics/recommendations
+Authorization: Bearer {{adminToken}}

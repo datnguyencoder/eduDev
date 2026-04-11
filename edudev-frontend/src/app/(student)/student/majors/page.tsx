@@ -76,7 +76,7 @@ export default function MajorsPage() {
                   
                   <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors mb-2">{major.name}</h3>
                   <div className="flex flex-wrap gap-2 mb-6">
-                     {major.admissionSubjects.map((sub: string) => (
+                     {major?.admissionSubjects?.map((sub: string) => (
                         <span key={sub} className="text-[10px] font-bold text-slate-400 border border-slate-100 px-2 py-0.5 rounded italic">{sub}</span>
                      ))}
                   </div>

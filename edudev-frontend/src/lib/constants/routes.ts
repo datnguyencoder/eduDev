@@ -17,6 +17,7 @@ export const ROUTES = {
   },
   TEACHER: {
     DASHBOARD: '/teacher/dashboard',
+    CONTENT: '/teacher/content',
     LESSON_BUILDER: '/teacher/lessons/build',
     QUIZ_BUILDER: '/teacher/quizzes/build',
     COMBO_BUILDER: '/teacher/combos/build',

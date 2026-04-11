@@ -19,7 +19,7 @@ import { useAuthStore } from '@/store/authStore';
 
 const sidebarItems = [
   { name: 'Tổng quan', href: ROUTES.TEACHER.DASHBOARD, icon: LayoutDashboard },
-  { name: 'Quản lý nội dung', href: '/teacher/content', icon: ClipboardList },
+  { name: 'Quản lý nội dung', href: ROUTES.TEACHER.CONTENT, icon: ClipboardList },
   { name: 'Soạn bài học', href: ROUTES.TEACHER.LESSON_BUILDER, icon: FileEdit },
   { name: 'Tạo Quiz', href: ROUTES.TEACHER.QUIZ_BUILDER, icon: PlusSquare },
   { name: 'Tạo Combo', href: ROUTES.TEACHER.COMBO_BUILDER, icon: Layers },

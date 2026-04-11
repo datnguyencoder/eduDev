@@ -54,7 +54,7 @@ export default function AdminMajorsPage() {
       key: 'admissionSubjects',
       render: (subs: string[]) => (
         <div className="flex flex-wrap gap-1">
-           {subs.map(s => <Tag key={s} className="bg-slate-50 border-slate-100 text-[9px] font-black text-slate-400 rounded uppercase">{s}</Tag>)}
+           {subs?.map(s => <Tag key={s} className="bg-slate-50 border-slate-100 text-[9px] font-black text-slate-400 rounded uppercase">{s}</Tag>)}
         </div>
       )
     },

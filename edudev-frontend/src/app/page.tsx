@@ -288,10 +288,10 @@ export default function LandingPage() {
             <div>
               <h4 className="text-white font-bold mb-6">Sản phẩm</h4>
               <ul className="space-y-4 text-sm">
-                <li><Link href="#" className="hover:text-blue-500 transition-colors">Bài giảng</Link></li>
-                <li><Link href="#" className="hover:text-blue-500 transition-colors">Quiz luyện tập</Link></li>
-                <li><Link href="#" className="hover:text-blue-500 transition-colors">Tư vấn chọn ngành</Link></li>
-                <li><Link href="#" className="hover:text-blue-500 transition-colors">Dashboard AI</Link></li>
+                <li><Link href={ROUTES.STUDENT.SUBJECTS} className="hover:text-blue-500 transition-colors">Bài giảng</Link></li>
+                <li><Link href={ROUTES.STUDENT.SUBJECTS} className="hover:text-blue-500 transition-colors">Quiz luyện tập</Link></li>
+                <li><Link href={ROUTES.STUDENT.RECOMMENDATIONS} className="hover:text-blue-500 transition-colors">Tư vấn chọn ngành</Link></li>
+                <li><Link href={ROUTES.STUDENT.DASHBOARD} className="hover:text-blue-500 transition-colors">Dashboard AI</Link></li>
               </ul>
             </div>
 

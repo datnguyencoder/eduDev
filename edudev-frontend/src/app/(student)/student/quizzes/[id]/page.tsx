@@ -2,30 +2,38 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { Clock, PlayCircle, Eye, CheckCircle2, ChevronRight, XCircle } from 'lucide-react';
+import { Clock, PlayCircle, CheckCircle2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { useQuizDetail, useSubmitQuizAttempt } from '@/lib/query/hooks/useQuiz';
 
 export default function TakeQuizPage() {
   const params = useParams();
   const router = useRouter();
   
   const [started, setStarted] = useState(false);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [answers, setAnswers] = useState<Record<string, number>>({});
   const [submitted, setSubmitted] = useState(false);
 
-    const mockQuiz = {
-    id: params.id,
-    title: 'Kiểm tra mô phỏng',
-    timeLimitMinutes: 15,
-    questions: [],
-  };
-  const activeQuiz = mockQuiz;
+  const quizId = params.id as string;
+  const { data: activeQuiz, isLoading } = useQuizDetail(quizId);
+  const submitAttempt = useSubmitQuizAttempt();
 
   const handleSubmit = () => {
-    setSubmitted(true);
+    if (!activeQuiz) return;
+    const formattedAnswers = Object.entries(answers).map(([qId, cId]) => ({
+      questionId: Number(qId),
+      choiceId: Number(cId)
+    }));
+    
+    submitAttempt.mutate({ quizId, answers: formattedAnswers }, {
+      onSuccess: () => setSubmitted(true)
+    });
   };
+
+  if (isLoading || !activeQuiz) {
+    return <div className="text-center py-12 text-slate-500">Đang tải...</div>;
+  }
 
   if (!started) {
     return (
@@ -57,18 +65,18 @@ export default function TakeQuizPage() {
         <div className="flex items-center justify-between mb-8">
            <div>
              <h1 className="text-xl font-bold text-slate-800">{activeQuiz.title}</h1>
-             <p className="text-sm text-slate-500">Câu hỏi 1 - {activeQuiz.questions.length}</p>
+             <p className="text-sm text-slate-500">Câu hỏi 1 - {(activeQuiz.questions?.length || 0)}</p>
            </div>
            {submitted && <span className="px-4 py-2 bg-emerald-50 text-emerald-600 font-bold border border-emerald-100 rounded-xl">Đã nộp bài</span>}
         </div>
 
-        {activeQuiz.questions.map((q, idx) => (
+        {(activeQuiz.questions || []).map((q, idx) => (
           <div key={q.id} className="bg-white border border-slate-200 p-6 rounded-2xl">
             <div className="font-bold text-slate-800 mb-4 pb-4 border-b border-slate-100">
               <span className="text-blue-600 mr-2">Câu {idx + 1}:</span> {q.content}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {q.choices.map((c) => (
+              {(q.choices || []).map((c) => (
                 <div 
                   key={c.id}
                   onClick={() => !submitted && setAnswers(prev => ({ ...prev, [q.id]: c.id }))}
@@ -103,7 +111,7 @@ export default function TakeQuizPage() {
           </div>
 
           <div className="grid grid-cols-5 gap-2 mb-8">
-            {activeQuiz.questions.map((q, idx) => (
+            {(activeQuiz.questions || []).map((q, idx) => (
               <div 
                 key={idx} 
                 className={cn(

@@ -11,7 +11,7 @@ import {
   Info
 } from 'lucide-react';
 import Link from 'next/link';
-import { useSubjectTopics } from '@/lib/query/hooks/useSubjects';
+import { useSubjectTopics, useSubjects } from '@/lib/query/hooks/useSubjects';
 import { cn } from '@/lib/utils';
 
 export default function SubjectTopicsPage() {
@@ -19,9 +19,10 @@ export default function SubjectTopicsPage() {
   const router = useRouter();
   const subjectId = params.id as string;
   const { data: topics, isLoading } = useSubjectTopics(subjectId);
+  const { data: subjects } = useSubjects();
 
-  // Mock subject info
-  const subjectName = "Toán học 12";
+  const currentSubject = subjects?.find(s => s.id.toString() === subjectId);
+  const subjectName = currentSubject?.name || "Chi tiết môn học";
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">

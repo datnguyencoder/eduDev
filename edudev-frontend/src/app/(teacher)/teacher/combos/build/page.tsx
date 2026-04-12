@@ -20,6 +20,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { useMajors } from '@/lib/query/hooks/useMajors';
 import { useSubjects } from '@/lib/query/hooks/useSubjects';
+import { SubjectTopicsList } from './SubjectTopicsList';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -154,23 +155,7 @@ export default function ComboBuilderPage() {
                      <div key={subject.id} className="space-y-3">
                         <h4 className="text-xs font-black text-slate-400 uppercase italic tracking-tighter border-l-2 border-indigo-600 pl-2">{subject.name}</h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pb-4">
-                           {/* Using static mock topics for demonstration if sub-topics are missing */}
-                           {['Cực trị hàm số', 'Đạo hàm bậc cao', 'Tích phân từng phần'].map((tName, i) => (
-                              <button
-                                key={i}
-                                type="button"
-                                onClick={() => toggleTopic(`${subject.id}-${i}`)}
-                                className={cn(
-                                   "flex items-center justify-between p-4 rounded-2xl border text-sm font-bold transition-all",
-                                   selectedTopics.includes(`${subject.id}-${i}`) 
-                                     ? "bg-indigo-50 border-indigo-200 text-indigo-700 shadow-sm" 
-                                     : "bg-white border-slate-100 text-slate-500 hover:border-slate-200"
-                                )}
-                              >
-                                 <span className="truncate">{tName}</span>
-                                 {selectedTopics.includes(`${subject.id}-${i}`) && <CheckCircle2 size={16} className="text-indigo-600" />}
-                              </button>
-                           ))}
+                           <SubjectTopicsList subjectId={subject.id.toString()} selectedTopics={selectedTopics} toggleTopic={toggleTopic} />
                         </div>
                      </div>
                   ))}

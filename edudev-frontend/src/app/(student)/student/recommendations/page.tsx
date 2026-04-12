@@ -21,7 +21,6 @@ export default function RecommendationPage() {
   const { data: recommendations, isLoading } = useRecommendations();
   const { mutate: toggleWishlist } = useToggleWishlist();
 
-  // Mock data if API is not available
   const topMajors: Major[] = recommendations
     ? recommendations.map((item: RecommendationResponse) => ({
         id: item.suggestedMajorId,

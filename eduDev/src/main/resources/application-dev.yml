@@ -39,3 +39,14 @@ logging:
     com.datdev.edudev: DEBUG
     org.springframework.security: INFO
     org.hibernate.SQL: DEBUG
+
+app:
+  vnpay:
+    tmn-code: ${VNPAY_TMN_CODE:}
+    hash-secret: ${VNPAY_HASH_SECRET:}
+    pay-url: ${VNPAY_PAY_URL:https://sandbox.vnpayment.vn/paymentv2/vpcpay.html}
+    return-url: ${VNPAY_RETURN_URL:http://localhost:8080/api/v1/public/payments/vnpay/return}
+    api-url: ${VNPAY_API_URL:https://sandbox.vnpayment.vn/merchant_webapi/api/transaction}
+    default-expire-minutes: ${PAYMENT_DEFAULT_EXPIRE_MINUTES:15}
+  frontend:
+    base-url: ${FRONTEND_BASE_URL:http://localhost:3000}

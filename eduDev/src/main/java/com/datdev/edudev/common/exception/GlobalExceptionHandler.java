@@ -115,6 +115,20 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponse> handleDataIntegrityViolation(
+            org.springframework.dao.DataIntegrityViolationException exception,
+            HttpServletRequest request
+    ) {
+        log.warn("Data integrity violation: {}", exception.getMostSpecificCause().getMessage());
+        return buildResponse(
+                ErrorCode.DUPLICATE_RESOURCE,
+                "A resource with the given unique identifier already exists",
+                request,
+                List.of()
+        );
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnhandledException(
             Exception exception,

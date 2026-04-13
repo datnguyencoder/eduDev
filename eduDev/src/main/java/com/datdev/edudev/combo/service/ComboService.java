@@ -68,8 +68,8 @@ public class ComboService {
     @Transactional
     @CacheEvict(value = "combos", allEntries = true)
     public ComboResponse createCombo(CreateComboRequest request) {
-        if (comboRepository.findByStatus(ContentStatus.PUBLISHED).stream().anyMatch(c -> c.getName().equals(request.name()))) {
-             // Basic unique name check
+        if (comboRepository.existsByName(request.name())) {
+            throw new BusinessException(ErrorCode.DUPLICATE_RESOURCE, "A combo with this name already exists");
         }
 
         Combo combo = Combo.builder()
@@ -84,10 +84,12 @@ public class ComboService {
             for (ComboItemRequest itemReq : request.items()) {
                 ComboItem item = ComboItem.builder().displayOrder(itemReq.displayOrder() != null ? itemReq.displayOrder() : 0).build();
                 if (itemReq.subjectId() != null) {
-                    Subject s = subjectRepository.findById(itemReq.subjectId()).orElseThrow();
+                    Subject s = subjectRepository.findById(itemReq.subjectId())
+                            .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "Subject not found: " + itemReq.subjectId()));
                     item.setSubject(s);
                 } else if (itemReq.topicId() != null) {
-                    Topic t = topicRepository.findById(itemReq.topicId()).orElseThrow();
+                    Topic t = topicRepository.findById(itemReq.topicId())
+                            .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "Topic not found: " + itemReq.topicId()));
                     item.setTopic(t);
                 }
                 combo.addItem(item);
@@ -116,9 +118,11 @@ public class ComboService {
                         .displayOrder(itemReq.displayOrder() != null ? itemReq.displayOrder() : 0)
                         .build();
                 if (itemReq.subjectId() != null) {
-                    item.setSubject(subjectRepository.findById(itemReq.subjectId()).orElseThrow());
+                    item.setSubject(subjectRepository.findById(itemReq.subjectId())
+                            .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "Subject not found: " + itemReq.subjectId())));
                 } else if (itemReq.topicId() != null) {
-                    item.setTopic(topicRepository.findById(itemReq.topicId()).orElseThrow());
+                    item.setTopic(topicRepository.findById(itemReq.topicId())
+                            .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "Topic not found: " + itemReq.topicId())));
                 }
                 combo.addItem(item);
             }
@@ -148,8 +152,10 @@ public class ComboService {
             throw new BusinessException(ErrorCode.ALREADY_ENROLLED, "User already enrolled in this combo");
         }
 
-        User user = userRepository.findById(userId).orElseThrow();
-        Combo combo = comboRepository.findById(comboId).orElseThrow();
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "User not found"));
+        Combo combo = comboRepository.findById(comboId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "Combo not found"));
         
         if (combo.getStatus() != ContentStatus.PUBLISHED) {
             throw new BusinessException(ErrorCode.INVALID_CONTENT_STATUS, "Cannot enroll in a non-published combo");

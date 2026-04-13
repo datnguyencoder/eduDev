@@ -32,4 +32,16 @@ public class Enrollment {
     @Column(nullable = false, length = 30)
     @Builder.Default
     private EnrollmentStatus status = EnrollmentStatus.ACTIVE;
+
+    @Column(name = "order_id")
+    private Long orderId;
+
+    @Column(name = "payment_transaction_id")
+    private Long paymentTransactionId;
+
+    @Column(name = "activated_at")
+    private Instant activatedAt;
+
+    @Column(name = "expired_at")
+    private Instant expiredAt;
 }

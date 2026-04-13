@@ -36,7 +36,21 @@ public enum ErrorCode {
 
     // Teacher
     ASSIGNMENT_EXISTS("TEACHER_001", "Assignment already exists", HttpStatus.CONFLICT),
-    NOT_ASSIGNED("TEACHER_002", "Teacher is not assigned to this resource", HttpStatus.FORBIDDEN);
+    NOT_ASSIGNED("TEACHER_002", "Teacher is not assigned to this resource", HttpStatus.FORBIDDEN),
+
+    // Order
+    ORDER_NOT_FOUND("ORDER_001", "Order not found", HttpStatus.NOT_FOUND),
+    ORDER_ALREADY_PAID("ORDER_002", "Order has already been paid", HttpStatus.CONFLICT),
+    ORDER_EXPIRED("ORDER_003", "Order has expired", HttpStatus.BAD_REQUEST),
+
+    // Payment
+    PAYMENT_INVALID_SIGNATURE("PAYMENT_001", "Invalid payment signature", HttpStatus.BAD_REQUEST),
+    PAYMENT_AMOUNT_MISMATCH("PAYMENT_002", "Payment amount does not match order", HttpStatus.BAD_REQUEST),
+    PAYMENT_ALREADY_PROCESSED("PAYMENT_003", "Payment has already been processed", HttpStatus.CONFLICT),
+
+    // Purchase
+    COMBO_NOT_PURCHASABLE("PURCHASE_001", "Combo is not available for purchase", HttpStatus.BAD_REQUEST),
+    COMBO_ALREADY_PURCHASED("PURCHASE_002", "You already have access to this combo", HttpStatus.CONFLICT);
 
     private final String code;
     private final String message;
